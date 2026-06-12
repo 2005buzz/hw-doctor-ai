@@ -51,8 +51,51 @@
 
     <div class="main-container">
         <div class="left-side">
-            <h3>🖥️ 하드웨어 정보 입력</h3>
-            <p>여기에 CPU, RAM 등의 선택 창을 만들 예정입니다.</p>
+            <div class="left-side">
+    <h3 style="margin-top: 0; color: #1e293b; font-size: 22px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+        🖥️ 하드웨어 정보 입력
+    </h3>
+    
+    <form id="hardwareForm" style="display: flex; flex-direction: column; gap: 18px; margin-top: 20px;">
+        <div>
+            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">1. 기기 유형</label>
+            <label style="margin-right: 15px;"><input type="radio" name="device" value="desktop" checked> 데스크톱</label>
+            <label><input type="radio" name="device" value="laptop"> 노트북</label>
+        </div>
+
+        <div>
+            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">2. CPU 제조사</label>
+            <select name="cpu" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                <option value="intel">Intel (인텔)</option>
+                <option value="amd">AMD (라이젠)</option>
+                <option value="etc">기타 / 잘 모름</option>
+            </select>
+        </div>
+
+        <div>
+            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">3. RAM 용량</label>
+            <select name="ram" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                <option value="8">8GB 이하 (사무용 수준)</option>
+                <option value="16">16GB (일반적인 게이밍/작업용)</option>
+                <option value="32">32GB 이상 (고사양 작업용)</option>
+            </select>
+        </div>
+
+        <div>
+            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">4. 현재 겪고 있는 증상 (중복 가능)</label>
+            <div style="display: flex; flex-direction: column; gap: 8px; background: #f8fafc; padding: 12px; border-radius: 6px;">
+                <label><input type="checkbox" name="symptom" value="heat"> 🔥 과도한 발열 및 팬 소음</label>
+                <label><input type="checkbox" name="symptom" value="noise"> ⚡ 찌르르하는 고주파 소음</label>
+                <label><input type="checkbox" name="symptom" value="vibe"> 📳 본체 진동 흔들림</label>
+                <label><input type="checkbox" name="symptom" value="lag"> 🐌 게임/작업 중 렉, 느려짐</label>
+            </div>
+        </div>
+
+        <button type="button" style="margin-top: 10px; padding: 14px; background: #1e293b; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.2s;">
+            📋 시스템 상태 진단하기
+        </button>
+    </form>
+</div>
             </div>
         
         <div class="right-side">
