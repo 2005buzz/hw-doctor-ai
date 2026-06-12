@@ -7,39 +7,56 @@
     body {
         font-family: 'Malgun Gothic', sans-serif;
         margin: 0; padding: 0;
-        background-color: #B0E0E6;
+        background-color: #cee5eb; /* 올려주신 이미지의 예쁜 민트빛 배경색 */
     }
     header {
-        text-align: center; padding: 20px;
+        text-align: center; padding: 25px;
         background-color: #1e293b; color: white;
     }
+    header h2 { margin: 0; font-size: 26px; }
     
-    /* 뼈대: 왼쪽과 오른쪽을 정렬하는 컨테이너 */
     .main-container {
         display: flex;
         max-width: 1400px;
         margin: 30px auto;
-        gap: 20px; /* 좌우 박스 사이의 간격 */
+        gap: 20px;
         padding: 0 20px;
     }
     
-    /* 왼쪽: 하드웨어 정보 입력 구역 */
     .left-side {
-        flex: 1; /* 화면의 40% 정도 차지 */
+        flex: 1;
         background: white;
         padding: 25px;
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        min-height: 600px;
     }
     
-    /* 오른쪽: AI 챗봇 구역 (위치 자체 변경 가능!) */
     .right-side {
-        flex: 1.5; /* 화면의 60% 정도 차지 */
+        flex: 1.5;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         overflow: hidden;
+    }
+
+    /* 결과창 디자인 */
+    .result-box {
+        display: none; /* 처음엔 숨겨둠 */
+        margin-top: 20px;
+        padding: 15px;
+        background: #f8fafc;
+        border-radius: 8px;
+        border-left: 5px solid #ef4444;
+    }
+    .copy-btn {
+        margin-top: 10px;
+        padding: 8px 12px;
+        background: #10b981;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
     }
 </style>
 </head>
@@ -51,52 +68,57 @@
 
     <div class="main-container">
         <div class="left-side">
-            <div class="left-side">
-    <h3 style="margin-top: 0; color: #1e293b; font-size: 22px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
-        🖥️ 하드웨어 정보 입력
-    </h3>
-    
-    <form id="hardwareForm" style="display: flex; flex-direction: column; gap: 18px; margin-top: 20px;">
-        <div>
-            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">1. 기기 유형</label>
-            <label style="margin-right: 15px;"><input type="radio" name="device" value="desktop" checked> 데스크톱</label>
-            <label><input type="radio" name="device" value="laptop"> 노트북</label>
-        </div>
+            <h3 style="margin-top: 0; color: #1e293b; font-size: 22px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+                🖥️ 하드웨어 정보 입력
+            </h3>
+            
+            <form id="hardwareForm" style="display: flex; flex-direction: column; gap: 18px; margin-top: 20px;">
+                <div>
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">1. 기기 유형</label>
+                    <label style="margin-right: 15px;"><input type="radio" name="device" value="데스크톱" checked> 데스크톱</label>
+                    <label><input type="radio" name="device" value="노트북"> 노트북</label>
+                </div>
 
-        <div>
-            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">2. CPU 제조사</label>
-            <select name="cpu" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
-                <option value="intel">Intel (인텔)</option>
-                <option value="amd">AMD (라이젠)</option>
-                <option value="etc">기타 / 잘 모름</option>
-            </select>
-        </div>
+                <div>
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">2. CPU 제조사</label>
+                    <select name="cpu" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <option value="Intel (인텔)">Intel (인텔)</option>
+                        <option value="AMD (라이젠)">AMD (라이젠)</option>
+                        <option value="기타/잘모름">기타 / 잘 모름</option>
+                    </select>
+                </div>
 
-        <div>
-            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">3. RAM 용량</label>
-            <select name="ram" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
-                <option value="8">8GB 이하 (사무용 수준)</option>
-                <option value="16">16GB (일반적인 게이밍/작업용)</option>
-                <option value="32">32GB 이상 (고사양 작업용)</option>
-            </select>
-        </div>
+                <div>
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">3. RAM 용량</label>
+                    <select name="ram" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <option value="8GB 이하">8GB 이하 (사무용 수준)</option>
+                        <option value="16GB">16GB (일반적인 게이밍/작업용)</option>
+                        <option value="32GB 이상">32GB 이상 (고사양 작업용)</option>
+                    </select>
+                </div>
 
-        <div>
-            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">4. 현재 겪고 있는 증상 (중복 가능)</label>
-            <div style="display: flex; flex-direction: column; gap: 8px; background: #f8fafc; padding: 12px; border-radius: 6px;">
-                <label><input type="checkbox" name="symptom" value="heat"> 🔥 과도한 발열 및 팬 소음</label>
-                <label><input type="checkbox" name="symptom" value="noise"> ⚡ 찌르르하는 고주파 소음</label>
-                <label><input type="checkbox" name="symptom" value="vibe"> 📳 본체 진동 흔들림</label>
-                <label><input type="checkbox" name="symptom" value="lag"> 🐌 게임/작업 중 렉, 느려짐</label>
+                <div>
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">4. 현재 겪고 있는 증상 (중복 가능)</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px; background: #f8fafc; padding: 12px; border-radius: 6px;">
+                        <label><input type="checkbox" name="symptom" value="과도한 발열 및 팬 소음"> 🔥 과도한 발열 및 팬 소음</label>
+                        <label><input type="checkbox" name="symptom" value="찌르르하는 고주파 소음"> ⚡ 찌르르하는 고주파 소음</label>
+                        <label><input type="checkbox" name="symptom" value="본체 진동 흔들림"> 📳 본체 진동 흔들림</label>
+                        <label><input type="checkbox" name="symptom" value="게임/작업 중 렉, 느려짐"> 🐌 게임/작업 중 렉, 느려짐</label>
+                    </div>
+                </div>
+
+                <button type="button" onclick="diagnoseSystem()" style="margin-top: 10px; padding: 14px; background: #1e293b; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer;">
+                    📋 시스템 상태 진단하기
+                </button>
+            </form>
+
+            <div id="resultBox" class="result-box">
+                <h4 style="margin: 0 0 10px 0; color: #0f172a;">📊 1차 컴퓨터 진단 결과</h4>
+                <p id="healthScore" style="font-weight: bold; font-size: 18px; margin-bottom: 10px;"></p>
+                <p id="aiPrompt" style="background: #e2e8f0; padding: 10px; border-radius: 4px; font-size: 14px; white-space: pre-wrap;"></p>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 질문 복사 후 AI에게 물어보기</button>
             </div>
         </div>
-
-        <button type="button" style="margin-top: 10px; padding: 14px; background: #1e293b; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.2s;">
-            📋 시스템 상태 진단하기
-        </button>
-    </form>
-</div>
-            </div>
         
         <div class="right-side">
             <iframe
@@ -107,5 +129,65 @@
         </div>
     </div>
 
+    <script>
+        function diagnoseSystem() {
+            // 1. 입력한 값들 싹 모아오기
+            const device = document.querySelector('input[name="device"]:checked').value;
+            const cpu = document.querySelector('select[name="cpu"]').value;
+            const ram = document.querySelector('select[name="ram"]').value;
+            
+            const symptoms = [];
+            document.querySelectorAll('input[name="symptom"]:checked').forEach((checkbox) => {
+                symptoms.push(checkbox.value);
+            });
+
+            // 2. 건강도 점수 계산하기 로직 (기본 100점 시작)
+            let score = 100;
+            score -= symptoms.length * 20; // 증상 하나당 20점씩 감점
+            if (ram === "8GB 이하") score -= 10; // 램이 낮으면 추가 감점
+
+            if (score < 0) score = 0;
+
+            // 3. 점수에 따른 색상 및 평가
+            let evaluation = "";
+            const resultBox = document.getElementById('resultBox');
+            if (score >= 80) {
+                evaluation = "🟢 양호 (관리가 잘 됨)";
+                resultBox.style.borderLeftColor = "#10b981";
+            } else if (score >= 50) {
+                evaluation = "🟡 주의 (점검 필요)";
+                resultBox.style.borderLeftColor = "#f59e0b";
+            } else {
+                evaluation = "🔴 위험 (조치 시급)";
+                resultBox.style.borderLeftColor = "#ef4444";
+            }
+
+            // 4. 화면에 결과 띄우기
+            document.getElementById('healthScore').innerText = `나의 PC 건강도: ${score}점 [${evaluation}]`;
+            
+            // 5. AI에게 전달할 최적의 질문 텍스트 자동 조립
+            let promptText = `안녕하세요! 제 컴퓨터 상태를 분석해 주세요.\n`;
+            promptText += `- 기기 종류: ${device}\n`;
+            promptText += `- CPU: ${cpu}\n`;
+            promptText += `- RAM 용량: ${ram}\n`;
+            promptText += `- 현재 증상: ${symptoms.length > 0 ? symptoms.join(', ') : '없음'}\n\n`;
+            promptText += `위 사양과 증상을 바탕으로 구체적인 원인과 단계별 문제 해결 방안을 알려줘!`;
+
+            document.getElementById('aiPrompt').innerText = promptText;
+            
+            // 결과창 부드럽게 보여주기
+            resultBox.style.display = "block";
+        }
+
+        // 6. 질문 복사하기 기능
+        function copyToClipboard() {
+            const promptText = document.getElementById('aiPrompt').innerText;
+            navigator.clipboard.writeText(promptText).then(() => {
+                alert("질문이 복사되었습니다! 오른쪽 AI 챗봇 창에 [Ctrl + V]로 붙여넣어 상담을 시작하세요! 😃");
+            }).catch(err => {
+                alert("복사에 실패했습니다. 내용을 직접 드래그해 복사해 주세요.");
+            });
+        }
+    </script>
 </body>
 </html>
