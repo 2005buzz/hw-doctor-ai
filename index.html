@@ -2,19 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>하드웨어 진단 AI</title>
+
+<!-- 브라우저 탭 아이콘 -->
+<link rel="icon" type="image/png" href="hardware-logo.png">
+
 <style>
     body {
         font-family: 'Malgun Gothic', sans-serif;
-        margin: 0; padding: 0;
-        background-color: #cee5eb; /* 올려주신 이미지의 예쁜 민트빛 배경색 */
+        margin: 0;
+        padding: 0;
+        background-color: #cee5eb;
     }
+
     header {
-        text-align: center; padding: 25px;
-        background-color: #1e293b; color: white;
+        text-align: center;
+        padding: 25px;
+        background-color: #1e293b;
+        color: white;
     }
-    header h2 { margin: 0; font-size: 26px; }
-    
+
+    header h2 {
+        margin: 0;
+        font-size: 26px;
+    }
+
     .main-container {
         display: flex;
         max-width: 1400px;
@@ -22,7 +35,7 @@
         gap: 20px;
         padding: 0 20px;
     }
-    
+
     .left-side {
         flex: 1;
         background: white;
@@ -30,7 +43,7 @@
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
-    
+
     .right-side {
         flex: 1.5;
         background: white;
@@ -39,82 +52,93 @@
         overflow: hidden;
     }
 
-    /* 결과창 디자인 */
-    .result-box {
-        display: none; /* 처음엔 숨겨둠 */
-        margin-top: 20px;
-        padding: 15px;
-        background: #f8fafc;
-        border-radius: 8px;
-        border-left: 5px solid #ef4444;
+    .logo {
+        display: block;
+        margin: 0 auto 20px auto;
+        width: 280px;
+        max-width: 90%;
     }
-    .copy-btn {
-        margin-top: 10px;
-        padding: 8px 12px;
-        background: #10b981;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: bold;
+
+    .guide-title {
+        color: #1e293b;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    .guide-box {
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 10px;
+        line-height: 2;
+        font-size: 16px;
+        color: #334155;
+    }
+
+    .guide-box p {
+        margin-bottom: 20px;
     }
 </style>
 </head>
+
 <body>
 
-    <header>
-        <h2>하드웨어 상태 진단 시스템</h2>
-    </header>
+<header>
+    <h2>하드웨어 상태 진단 시스템</h2>
+</header>
 
-    <div class="main-container">
-        <div class="left-side">
-            
-    <div style="text-align:center;">
+<div class="main-container">
+
+    <!-- 왼쪽 안내 영역 -->
+    <div class="left-side">
+
         <img src="hardware-logo.png"
              alt="YourHardware"
-             style="width:80%; max-width:350px; margin-bottom:20px;">
-    </div>
+             class="logo">
 
-    <h3 style="color:#1e293b; line-height:1.8;">
-        정확한 하드웨어 점검을 위해 현재 컴퓨터 사양이 필요합니다.
-    </h3>
+        <h3 class="guide-title">
+            정확한 하드웨어 점검을 위해 현재 컴퓨터 사양이 필요합니다.
+        </h3>
 
-    <div style="
-        background:#f8fafc;
-        padding:20px;
-        border-radius:10px;
-        line-height:2;
-        font-size:16px;
-        color:#334155;
-    ">
-        <p>
-            <strong>1.</strong> 키보드의 <strong>[Windows 키 + R]</strong>을 누르고
-            <strong>dxdiag</strong>를 입력 후 엔터를 쳐주세요.
-        </p>
+        <div class="guide-box">
 
-        <p>
-            <strong>2.</strong> 창이 뜨면 아래쪽의
-            <strong>[모든 정보 저장]</strong>을 눌러
-            텍스트 파일(.txt)로 저장해 주세요.
-        </p>
+            <p>
+                <strong>1.</strong>
+                키보드의 <strong>[Windows 키 + R]</strong>을 누르고
+                <strong>dxdiag</strong>를 입력 후 엔터를 쳐주세요.
+            </p>
 
-        <p>
-            <strong>3.</strong> 저장된 텍스트 파일을 열어 내용을 전체 복사
-            (<strong>Ctrl+A → Ctrl+C</strong>)한 뒤,
-            오른쪽 AI 채팅창에 붙여넣기
-            (<strong>Ctrl+V</strong>) 해주시면
-            맞춤형 점검을 시작합니다.
-        </p>
-    </div>
+            <p>
+                <strong>2.</strong>
+                창이 뜨면 아래쪽의
+                <strong>[모든 정보 저장]</strong>을 눌러
+                텍스트 파일(.txt)로 저장해 주세요.
+            </p>
+
+            <p>
+                <strong>3.</strong>
+                저장된 텍스트 파일을 열어 내용을 전체 복사
+                (<strong>Ctrl+A → Ctrl+C</strong>)한 뒤,
+                오른쪽 AI 채팅창에 붙여넣기
+                (<strong>Ctrl+V</strong>) 해주시면
+                맞춤형 점검을 시작합니다.
+            </p>
+
         </div>
-        
-        <div class="right-side">
-            <iframe
-             src="https://udify.app/chatbot/2pe7Gco4neuXmxlT"
-             style="width: 100%; height: 100%; min-height: 700px; border: none;"
-             allow="microphone">
-            </iframe>
-        </div>
+
     </div>
+
+    <!-- 오른쪽 AI 영역 -->
+    <div class="right-side">
+
+        <iframe
+            src="https://udify.app/chatbot/2pe7Gco4neuXmxlT"
+            style="width:100%; height:100%; min-height:700px; border:none;"
+            allow="microphone">
+        </iframe>
+
+    </div>
+
+</div>
+
 </body>
 </html>
