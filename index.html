@@ -68,26 +68,65 @@
 
     <div class="main-container">
         <div class="left-side">
-            <div style="text-align:center;">
-        <img src="hardware-logo.png"
-             alt="Hardware Diagnostic"
-             style="width:80%; max-width:400px;">
-    </div>
+            <h3 style="margin-top: 0; color: #1e293b; font-size: 22px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+                🖥️ 하드웨어 정보 입력
+            </h3>
+            
+            <form id="hardwareForm" style="display: flex; flex-direction: column; gap: 18px; margin-top: 20px;">
+                <div>
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">1. 기기 유형</label>
+                    <label style="margin-right: 15px;"><input type="radio" name="device" value="데스크톱" checked> 데스크톱</label>
+                    <label><input type="radio" name="device" value="노트북"> 노트북</label>
+                </div>
 
-    <h3>정확한 하드웨어 점검을 위해 현재 컴퓨터 사양이 필요합니다.</h3>
+                <div>
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">2. CPU 제조사</label>
+                    <select name="cpu" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <option value="Intel (인텔)">Intel (인텔)</option>
+                        <option value="AMD (라이젠)">AMD (라이젠)</option>
+                        <option value="기타/잘모름">기타 / 잘 모름</option>
+                    </select>
+                </div>
 
-    <p style="line-height:2;">
-        1. 키보드의 <strong>[Windows 키 + R]</strong>을 누르고
-        <strong>dxdiag</strong>를 입력 후 엔터를 쳐주세요.<br><br>
+                <div>
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">3. RAM 용량</label>
+                    <select name="ram" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <option value="8GB 이하">8GB 이하 (사무용 수준)</option>
+                        <option value="16GB">16GB (일반적인 게이밍/작업용)</option>
+                        <option value="32GB 이상">32GB 이상 (고사양 작업용)</option>
+                    </select>
+                </div>
 
-        2. 창이 뜨면 아래쪽의
-        <strong>[모든 정보 저장]</strong>을 눌러 텍스트 파일(.txt)로 저장해 주세요.<br><br>
+                <div>
+                    <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #334155;">4. 현재 겪고 있는 증상 (중복 가능)</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px; background: #f8fafc; padding: 12px; border-radius: 6px;">
+                        <label><input type="checkbox" name="symptom" value="과도한 발열 및 팬 소음"> 🔥 과도한 발열 및 팬 소음</label>
+                        <label><input type="checkbox" name="symptom" value="찌르르하는 고주파 소음"> ⚡ 찌르르하는 고주파 소음</label>
+                        <label><input type="checkbox" name="symptom" value="본체 진동 흔들림"> 📳 본체 진동 흔들림</label>
+                        <label><input type="checkbox" name="symptom" value="게임/작업 중 렉, 느려짐"> 🐌 게임/작업 중 렉, 느려짐</label>
+                    </div>
+                </div>
 
-        3. 저장된 텍스트 파일을 열어 내용을 전체 복사
-        (<strong>Ctrl+A → Ctrl+C</strong>)한 뒤,
-        AI 채팅창에 붙여넣기
-        (<strong>Ctrl+V</strong>) 해주시면 맞춤형 점검을 시작합니다.
-    </p>
+                <button type="button" onclick="diagnoseSystem()" style="margin-top: 10px; padding: 14px; background: #1e293b; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer;">
+                    📋 시스템 상태 진단하기
+                </button>
+            </form>
+
+            <div id="resultBox" class="result-box">
+                <h4 style="margin: 0 0 10px 0; color: #0f172a;">📊 1차 컴퓨터 진단 결과</h4>
+                <p id="healthScore" style="font-weight: bold; font-size: 18px; margin-bottom: 10px;"></p>
+                <p id="aiPrompt" style="background: #e2e8f0; padding: 10px; border-radius: 4px; font-size: 14px; white-space: pre-wrap;"></p>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 질문 복사 후 AI에게 물어보기</button>
+            </div>
+        </div>
+        
+        <div class="right-side">
+            <iframe
+             src="https://udify.app/chatbot/2pe7Gco4neuXmxlT"
+             style="width: 100%; height: 100%; min-height: 700px; border: none;"
+             allow="microphone">
+            </iframe>
+        </div>
     </div>
 
     <script>
